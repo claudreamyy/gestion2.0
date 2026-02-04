@@ -1,0 +1,5 @@
+com\mycompany\gestion\eleves\servlet\AddStudentServlet.class
+com\mycompany\gestion\eleves\resources\JakartaEE11Resource.class
+com\gestion\servlet\StudentServlet.class
+com\mycompany\gestion\eleves\JakartaRestConfiguration.class
+ListStudentServlet.class
