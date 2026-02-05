@@ -11,11 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Récupère ton code source depuis le dépôt GitHub
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      # 2. Installe l'environnement Java 25 (pour correspondre à ton pom.xml)
       - name: Configuration de Java 25
         uses: actions/setup-java@v4
         with:
@@ -23,13 +21,15 @@ jobs:
           distribution: 'oracle'
           cache: maven
 
-      # 3. Compile le projet et crée le JAR via ton pom.xml
       - name: Build avec Maven
         run: mvn -B package
 
-      # 4. Sauvegarde le fichier .jar pour que tu puisses le télécharger
-      - name: Telecharger l'executable JAR
+      # Cette étape permet de voir si le fichier JAR existe vraiment
+      - name: Lister les fichiers pour verification
+        run: find . -name "*.jar"
+
+      - name: Telecharger le JAR
         uses: actions/upload-artifact@v4
         with:
           name: mon-projet-gestion
-          path: target/*.jar
+          path: "**/target/*.jar" # Cherche le JAR peu importe où il est dans target
