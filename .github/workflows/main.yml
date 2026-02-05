@@ -1,10 +1,7 @@
 name: Java CI avec Maven
 
-# Déclenche le build à chaque push sur la branche main
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -12,11 +9,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Récupère ton code source depuis le dépôt GitHub
       - name: Checkout du code
         uses: actions/checkout@v4
 
-      # 2. Installe l'environnement Java (JDK)
       - name: Configuration de Java 17
         uses: actions/setup-java@v4
         with:
@@ -24,12 +19,9 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      # 3. Compile le projet et crée le JAR via ton pom.xml
-      # C'est ici que l'automatisation Maven opère
       - name: Build avec Maven
         run: mvn -B package
 
-      # 4. Sauvegarde le fichier .jar pour que tu puisses le télécharger
       - name: Telecharger l'executable JAR
         uses: actions/upload-artifact@v4
         with:
