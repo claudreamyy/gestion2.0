@@ -1,4 +1,4 @@
-name: Java CI avec Maven (Web)
+name: Java CI avec Maven
 
 on:
   push:
@@ -24,9 +24,9 @@ jobs:
       - name: Build avec Maven
         run: mvn -B package
 
-      - name: Telecharger le WAR (Application Web)
+      - name: Telecharger l'executable JAR
         uses: actions/upload-artifact@v4
         with:
-          name: gestion-eleves-web
-          # On change .jar par .war ici
-          path: "**/target/*.war"
+          name: gestion-eleves-application
+          # On cherche tous les fichiers .jar dans le dossier target
+          path: "**/target/*.jar"
