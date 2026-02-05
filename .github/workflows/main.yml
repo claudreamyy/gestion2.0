@@ -24,9 +24,8 @@ jobs:
       - name: Build avec Maven
         run: mvn -B package
 
-      - name: Telecharger l'executable JAR
+      - name: Telecharger l'application WEB (WAR)
         uses: actions/upload-artifact@v4
         with:
-          name: gestion-eleves-application
-          # On cherche tous les fichiers .jar dans le dossier target
-          path: "**/target/*.jar"
+          name: gestion-eleves-web
+          path: "**/target/*.war"
