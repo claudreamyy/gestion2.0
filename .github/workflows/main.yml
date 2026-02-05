@@ -1,4 +1,4 @@
-name: Java CI avec Maven
+name: Java CI avec Maven (Web)
 
 on:
   push:
@@ -24,12 +24,9 @@ jobs:
       - name: Build avec Maven
         run: mvn -B package
 
-      # Cette étape permet de voir si le fichier JAR existe vraiment
-      - name: Lister les fichiers pour verification
-        run: find . -name "*.jar"
-
-      - name: Telecharger le JAR
+      - name: Telecharger le WAR (Application Web)
         uses: actions/upload-artifact@v4
         with:
-          name: mon-projet-gestion
-          path: "**/target/*.jar" # Cherche le JAR peu importe où il est dans target
+          name: gestion-eleves-web
+          # On change .jar par .war ici
+          path: "**/target/*.war"
