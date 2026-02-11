@@ -9,22 +9,21 @@
     <target name="all" depends="info, deploy-tomcat, create-zip" />
 
     <target name="info">
-        <echo message="Démarrage de la phase CD pour ${war.name}" />
+        <echo message="Préparation du déploiement pour ${war.name}" />
     </target>
 
     <target name="deploy-tomcat">
-        <echo message="Copie du WAR vers Tomcat dans Program Files..." />
+        <echo message="Copie du WAR vers Tomcat..." />
         <copy file="${target.dir}/${war.name}" todir="${tomcat.webapps}" overwrite="true" verbose="true" />
     </target>
 
     <target name="create-zip">
-        <echo message="Création du package ZIP de sauvegarde..." />
+        <echo message="Création du ZIP dans le dossier dist..." />
         <mkdir dir="${dist.dir}" />
-        <zip destfile="${dist.dir}/gestion-eleves-package.zip">
+        <zip destfile="${dist.dir}/package-complet.zip">
             <fileset dir="${target.dir}" includes="${war.name}" />
-            <fileset dir="." includes="README.md, pom.xml" />
+            <fileset dir="." includes="pom.xml, README.md" />
         </zip>
-        <echo message="Package ZIP créé dans le dossier ${dist.dir}" />
     </target>
 
 </project>
