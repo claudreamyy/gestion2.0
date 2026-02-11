@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="GestionEleves-Ant" default="info" basedir=".">
+<project name="GestionEleves-CD" default="all" basedir=".">
 
+    <property name="tomcat.webapps" value="C:/Program Files/Apache Software Foundation/Tomcat 9.0/webapps" />
     <property name="target.dir" value="target" />
+    <property name="dist.dir" value="dist" />
+    <property name="war.name" value="gestion-eleves.war" />
+
+    <target name="all" depends="info, deploy-tomcat, create-zip" />
 
     <target name="info">
-        <echo message="Exécution des tâches Ant pour le projet Gestion Éleves" />
+        <echo message="Démarrage de la phase CD pour ${war.name}" />
     </target>
 
-    <target name="prepare">
-        <echo message="Vérification du dossier target..." />
-        <available file="${target.dir}" type="dir" property="target.exists" />
+    <target name="deploy-tomcat">
+        <echo message="Copie du WAR vers Tomcat dans Program Files..." />
+        <copy file="${target.dir}/${war.name}" todir="${tomcat.webapps}" overwrite="true" verbose="true" />
+    </target>
+
+    <target name="create-zip">
+        <echo message="Création du package ZIP de sauvegarde..." />
+        <mkdir dir="${dist.dir}" />
+        <zip destfile="${dist.dir}/gestion-eleves-package.zip">
+            <fileset dir="${target.dir}" includes="${war.name}" />
+            <fileset dir="." includes="README.md, pom.xml" />
+        </zip>
+        <echo message="Package ZIP créé dans le dossier ${dist.dir}" />
     </target>
 
 </project>
