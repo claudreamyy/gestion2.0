@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="GestionEleves-Ant-Task" default="info" basedir=".">
+<project name="GestionEleves-Ant" default="info" basedir=".">
 
     <property name="target.dir" value="target" />
-    <property name="deploy.dir" value="deploy_folder" />
 
     <target name="info">
-        <echo message="Execution des taches Ant pour le projet Gestion Eleves" />
-    }
+        <echo message="Exécution des tâches Ant pour le projet Gestion Éleves" />
     </target>
 
-    <target name="prepare-deploy">
-        <echo message="Creation du dossier de deploiement..." />
-        <mkdir dir="${deploy.dir}" />
-        
-        <copy todir="${deploy.dir}">
-            <fileset dir="${target.dir}">
-                <include name="*.war" />
-            </fileset>
-        </copy>
-        <echo message="Fichier WAR deplace avec succes vers ${deploy.dir}" />
+    <target name="prepare">
+        <echo message="Vérification du dossier target..." />
+        <available file="${target.dir}" type="dir" property="target.exists" />
     </target>
 
 </project>
